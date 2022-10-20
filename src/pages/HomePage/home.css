@@ -1,10 +1,10 @@
 
-
-/* .Home{
+.home-wrapper{
     display: flex;
     flex-direction: column;
-    color: black;
-} */
+    background-color: white;
+    
+}
 a{
   text-decoration: none;
   

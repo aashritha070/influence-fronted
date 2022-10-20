@@ -1,56 +1,71 @@
-import './navbar.css';
-import React from 'react';
-import { useContext } from 'react';
+import "./Navbar.css";
+import React from "react";
+import { useContext } from "react";
+import Button from "react-bootstrap/Button";
 
-
-import Context from '../../context/Context'
-import { Link } from 'react-router-dom';
+import Context from "../../context/Context";
+import { Link } from "react-router-dom";
 export default function Navbar() {
+  const token = localStorage.getItem("Token");
 
-  const {user,dispatch}=useContext(Context);
- 
+  const handleLogout = () => {};
 
-  const handleLogout=()=>{
-    dispatch({type:"LOGOUT"})
-  }
   return (
-    
-    <div className='NavBar'>
-             <div className='navbar-left'>
-        <ul className='menu'>
-          <li className='logo'>Influence</li>
+    <nav class="navbar navbar-dark  navbar-expand-md  justify-content-center">
+      <a href="/" class="navbar-brand d-flex w-50 mr-auto">
+        influence
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsingNavbar3"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">
+              Home
+            </a>
+          </li>
+          {token && token !== undefined ?(
+          <><li class="nav-item">
+              <a class="nav-link" href="/writePost">
+                Write
+              </a>
+            </li><li class="nav-item">
+                <a class="nav-link" href="/">
+                  My Blogs
+                </a>
+              </li></>):(
+            <li></li>
+          )}
+        </ul>
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+          {token && token !== undefined ? (
+            <>
+              <a href="/profile">
+                <li class="nav-item">
+                  <button class="nav-button">Profile</button>
+                </li>
+              </a>
+              <li class="nav-item">
+                <button class="nav-button" href="#">
+                  logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li class="nav-item">
+              <button class="nav-button" href="#">
+                Login
+              </button>
+            </li>
+          )}
         </ul>
       </div>
-
-      <div className='navbar-mid'>
-        <ul className='menu'>
-        <a className='alink' href="/">  <button className='navButton'><li className='menuItem'>HOME</li></button></a>
-    
-          
-          {user? (<ul className='menu'> <a className='alink' href="/writePost">  <button className='navButton'><li className='menuItem'> WRITE</li></button></a>
-        <Link to={`/?user=${user.username}`} className='alink'> <button className='navButton'><li className='menuItem'> MY POSTS</li></button></Link></ul>):
-          (<ul className='menu'><li className='menuItem'></li>
-          
-          <li className='menuItem'> </li></ul>
-        
-          )}  </ul>
-      </div>
-
-
-
-      <div className='navbar-right'>
-      
-
-        {user ? (
-        <ul className='menu'><li className='menuItem'>hi  {user.username}</li>
-            <li className='menuItem' onClick={handleLogout}>LOGOUT </li></ul> ) : (
-          <ul className='menu'>
-            <li className='menuItem'><a className='alink' href="/login"> LOGIN</a></li>
-            <li className='menuItem'><a className='alink' href="/signUp"> REGISTER</a></li>
-          </ul>
-        )}
-       
-       </div>
-    </div>
-  )
+    </nav>
+  );
 }

@@ -1,4 +1,4 @@
-import './writePost.css';
+import './WritePage.css';
 import Navbar from '../../components/Navbar/Navbar';
 import React from 'react';
 import axios from 'axios';

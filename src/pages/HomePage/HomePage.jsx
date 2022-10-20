@@ -2,12 +2,13 @@ import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import {useEffect,useState} from 'react'
 import { useLocation } from 'react-router-dom'
-import Header from '../../components/header/Header'
+import Header from '../../components/Header/Header'
 import Posts from '../../components/posts/Posts'
 import Sidebar from '../../components/sidebar/Sidebar'
 import { Link } from 'react-router-dom'
 import Footer from '../../components/footer/Footer'
 import './home.css'
+// const background= require('../../static/background.jpg')
 import axios from 'axios'
 
 
@@ -34,7 +35,7 @@ export default function Home() {
 
 
   return (
-  <>
+  <div className='home-wrapper'>
   <Navbar/>
     <Header />
     <div className='Home'>
@@ -48,14 +49,15 @@ export default function Home() {
           ))}
         </ul>
         </div>
-      <p >New on Influence!</p>
+      {/* <p >New on Influence!</p> */}
       </div>
     
     <Posts posts={posts} />
     
     
     </div>
-    <Footer />
-    </>
+ 
+    </div>
+    
   )
 }

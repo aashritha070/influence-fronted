@@ -1,90 +1,88 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    letter-spacing:0.6px;
-  }
-  html {
-    font-size: 16px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  
-  }
-  
-  :root {
-    --secondary: #9daaf2;
-    --primary: #1a2238;
-    --highlight: #ff6a3d;
-    --tertiary:#f4db7d;
-  }
-  .container {
-    display: flex;
-    font-family: "Inter", sans-serif;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-      
-  }
-  
-  .container-title {
-    text-align: center;
-    font-weight: 600;
-    margin-bottom: 20px;
-    font-size: 20px;
-  }
-  
-  .container-content {
-    width: 350px;
-   height: fit-content;
-    background: white;
-    border-radius: 12px;
-    padding: 50px;
-  }
-  
-  .container-footer {
-    margin-top: 10px;
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .button {
-    background: var(--highlight);
-    color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 100%;
-    border-width: 0px;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-  
-  }
-  
-  .container-form{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-  
-  }
-   .form-group{
-      margin:10px 0px 20px 0px;
-      text-align: start;
-  
-  }
-  .group-label{
-      margin-top: 10px;
-      font-size: 16px;
-  
-  }
-  .group-input{
-      margin-top: 10px;
-      width: 100%;
-      height: 30px;
-      font-size: 13px;
-      border-radius: 5px;
-      border: 1px solid gray;
-      padding: 16px;
-  } 
-  
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  letter-spacing: 0.6px;
+}
+html {
+  font-size: 16px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+:root {
+  --secondary: #9daaf2;
+  --primary: #1a2238;
+  --highlight: #ff6a3d;
+  --tertiary: #f4db7d;
+}
+body {
+  background: var(--primary) !important;
+}
+
+.container {
+  display: flex;
+  font-family: "Inter", sans-serif;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+.home-container {
+  display: flex;
+  font-family: "Inter", sans-serif;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.logout-btn {
+  display: flex;
+  margin-left: 90%;
+  margin-top: 5%;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  color: var(--primary);
+  padding: 10px;
+  font-weight: 500;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center;
+}
+.container-content {
+  width: 450px;
+  height: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 50px;
+}
+
+.container-title {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.button {
+  background: var(--highlight) !important;
+  color: white;
+  border-width: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.container-footer {
+  margin-top: 10px;
+  text-align: center;
+  margin-top: 15px;
+}
