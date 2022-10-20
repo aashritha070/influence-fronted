@@ -1,0 +1,18 @@
+.viewPost{
+    display: flex;
+    min-height: 95vh;
+    overflow-y: hidden !important ;
+}
+a{
+    text-decoration: none;
+}
+a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+a:active {
+    color: blue;
+    background-color: transparent;
+    text-decoration: underline;
+  }

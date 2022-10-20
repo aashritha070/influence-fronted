@@ -1,0 +1,10 @@
+.posts{
+
+    display:flex;
+    
+    flex-wrap: wrap;
+    margin-left: 100px;
+}
+.posts {
+    flex:50px;
+}
