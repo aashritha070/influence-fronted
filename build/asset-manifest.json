@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/influence-fronted/static/css/main.b00ff339.css",
+    "main.js": "/influence-fronted/static/js/main.aaf296d1.js",
+    "index.html": "/influence-fronted/index.html",
+    "main.b00ff339.css.map": "/influence-fronted/static/css/main.b00ff339.css.map",
+    "main.aaf296d1.js.map": "/influence-fronted/static/js/main.aaf296d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b00ff339.css",
+    "static/js/main.aaf296d1.js"
+  ]
+}
