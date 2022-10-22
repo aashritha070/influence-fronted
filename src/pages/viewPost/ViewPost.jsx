@@ -9,8 +9,7 @@ export default function viewPost() {
     <Navbar/>
     <div className='viewPost'>
       
-        <CurrentPost />
-        <Sidebar />
+    
         </div>
         </div>
   );

@@ -1,65 +1,104 @@
-import React from 'react'
-import Navbar from '../../components/Navbar/Navbar'
-import {useEffect,useState} from 'react'
-import { useLocation } from 'react-router-dom'
-import Header from '../../components/Header/Header'
-import Posts from '../../components/posts/Posts'
-import Sidebar from '../../components/sidebar/Sidebar'
-import { Link } from 'react-router-dom'
-import Footer from '../../components/footer/Footer'
-import './home.css'
-// const background= require('../../static/background.jpg')
-import axios from 'axios'
+import React, { useRef } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import {
+  CCard,
+  CCardBody,
+  CCardImage,
+  CCardTitle,
+  CCardText,
+  CButton,
+} from "@coreui/react";
 
+import Navbar from "../../components/Navbar/Navbar";
+import Header from "../../components/Header/Header";
+import "./home.css";
+const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
 export default function Home() {
-  const[posts, setPosts]=useState([])
-  const {search} = useLocation();
-  const [tag, setTag] = useState([]);
-  const length = tag.length;
-  
-  useEffect(()=>{
-    const renderBlog = async ()=>{
-     const res = await axios.get("http://localhost:5000/posts"+ search)
-     console.log(res)
-     setPosts(res.data)
-    }
-    renderBlog();
-  },[search])
- 
-  useEffect(()=>{
-    const getTag = async () =>{
-      const res= await axios.get("http://localhost:5000/tag");
-      setTag(res.data);
-    };
-    getTag();
-  },[]);
+  const [blogsByTag, setblogsByTag] = useState([]);
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [allTags, setAllTags] = useState([]);
+  const [isload, setIsLoad] = useState(false);
+  const jwtToken = {
+    token: localStorage.getItem("Token"),
+  };
 
+  useEffect(() => {
+    setIsLoad(true);
+    const fetchBlogsByTags = async () => {
+      console.log("jwtToken", jwtToken);
+      await axios
+        .post("http://localhost:5000/blog/tag", jwtToken)
+        .then((res) => {
+          if (res.data?.message === "No tags available") {
+            return window.location.replace("/tagselect");
+          }
+          console.log("fetchBlogsByTags", res);
+          setblogsByTag(res.data.data);
+        })
+        .catch((err) => {
+          console.log("fetchBlogsByTags", err);
+        });
+    };
+    fetchBlogsByTags();
+
+    const fetchAllBlogs = async () => {
+      await axios
+        .post("http://localhost:5000/blog/all", jwtToken)
+        .then((res) => {
+          console.log("fetchAllBlogs", res);
+          setAllBlogs(res.data.data);
+        })
+        .catch((err) => {
+          console.log("fetchAllBlogs", err);
+        });
+    };
+    fetchAllBlogs();
+
+    const fetchAllTags = async () => {
+      await axios
+        .post("http://localhost:5000/tags", jwtToken)
+        .then((res) => {
+          console.log("fetchAllTags", res);
+          setAllTags(res.data.tags);
+        })
+        .catch((err) => {
+          console.log("fetchAllTags", err);
+        });
+    };
+
+    fetchAllTags();
+    setIsLoad(false);
+  }, []);
+
+  const handleReadBlog = (id) => {
+    console.log("handleReadBlog", id);
+  };
+  if (isload) {
+    return <div></div>;
+  }
 
   return (
-  <div className='home-wrapper'>
-  <Navbar/>
-    <Header />
-    <div className='Home'>
-      <div className='recent-message'>
-        <div className='sidebar_home'>
-       <ul className='sideBarList_Home'>
-          {tag.map((c)=>(
-            <Link to={`/?tag=${c.name}`}  >
-               <li className='sideBarListItem_Home'>{c.name}</li>
-          </Link>
-          ))}
-        </ul>
-        </div>
-      {/* <p >New on Influence!</p> */}
+    <div className="home-wrapper">
+      <Navbar />
+      <Header />
+      <div className="Home">
+        {allBlogs.map((blog) => (
+          <CCard style={{ width: "18rem" }}>
+            {blog.coverPic ? (
+              <CCardImage src={defaultBlogCoverPic} />
+            ) : (
+              <CCardImage orientation="top" src="../../static/background.jpg" />
+            )}
+            <CCardBody>
+              <CCardTitle>{blog.title}</CCardTitle>
+              <CCardText>{blog.content}</CCardText>
+              <CButton onClick={handleReadBlog(blog._id)}>Read more</CButton>
+            </CCardBody>
+          </CCard>
+        ))}
       </div>
-    
-    <Posts posts={posts} />
-    
-    
     </div>
- 
-    </div>
-    
-  )
+  );
 }

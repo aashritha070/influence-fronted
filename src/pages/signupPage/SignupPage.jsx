@@ -26,7 +26,8 @@ const Signup = () => {
     axios
       .post("http://localhost:5000/auth/signup", userData)
       .then((response) => {
-        console.log(response);
+        localStorage.setItem("Token", response.data.authToken);
+        console.log("response quote", response);
         setRedirect(true);
       })
       .catch((error) => {

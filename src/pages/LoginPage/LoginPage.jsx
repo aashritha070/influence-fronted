@@ -46,7 +46,7 @@ function Login() {
     return <Navigate to="/" />;
   }
 
-  const jwtToken = localStorage.getItem("Token");
+  
   
   return (
     <div>

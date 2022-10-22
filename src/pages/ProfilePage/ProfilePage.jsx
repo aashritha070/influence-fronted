@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import './ProfilePage.css'
-import '../DeletePage/DeletePage.css'
+// import '../DeletePage/DeletePage'
 import Navbar from "../../components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import { React } from "react";
@@ -84,9 +84,9 @@ const ProfileSettings = () => {
             </Button>
 
           </Form>
-          <button className="delete-account">
-          <a href="/deleteUser" class="trigger-btn" data-toggle="modal">Delete Account</a>
-          </button>
+          <div className="delete-account">
+          Delete Account
+          </div>
 
           
         </div>

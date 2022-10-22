@@ -22,6 +22,7 @@
 }
 .nav-item {
   height: 40px;
+  
 }
 .navbar-nav {
   gap: 10px;
@@ -84,12 +85,11 @@
   display: block;
 }
 
-.delete-account{
+.delete-account {
   color: red;
   cursor: pointer;
 }
 
-.delete-account:hover{
+.delete-account:hover {
   color: darkred;
 }
-

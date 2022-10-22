@@ -1,6 +1,7 @@
 // import React, { useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
+import '@coreui/coreui/dist/css/coreui.min.css'
 import "./App.css";
 import Home from "./pages/HomePage/HomePage.jsx";
 import Login from "./pages/LoginPage/LoginPage.jsx";
@@ -21,7 +22,7 @@ function App() {
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
-        <Route exact path="/tagSelect" element={<Tags />}></Route>
+        <Route exact path="/tagselect" element={<Tags />}></Route>
         <Route exact path="/writePost" element={<WritePost />}></Route>
         <Route exact path="/profile" element={<ProfileSettings />}></Route>
         <Route exact path="/password" element={<PasswordChange />}></Route>

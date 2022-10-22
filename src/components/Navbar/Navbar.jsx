@@ -12,7 +12,10 @@ export default function Navbar() {
     return (window.location = "/login");
   }
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload(false);
+  };
 
   return (
     <nav class="navbar navbar-dark  navbar-expand-md  justify-content-center">
@@ -53,16 +56,32 @@ export default function Navbar() {
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
           {token && token !== undefined ? (
+           <><li className="nav-item"> 
            <div class="dropdown">
-           <button class="dropbtn"> 
-             <i class="fa fa-cog"></i>
-           </button>
-           <div class="dropdown-content">
-             <a href="/profile"> <i class="fa fa-user"/> My Profile</a>
-             <a href="/password"><i class="fa fa-key"/> Change Password</a>
-             <a href=""> <i class="fa fa-sign-out"/> Logout</a>
-           </div>
-           </div>
+              <button class="dropbtn">
+                <i class="fa fa-cog"></i>
+              </button>
+              <div class="dropdown-content">
+                <a href="/profile">
+                  {" "}
+                  <span>
+                    <i class="fa fa-user" /> My Profile{" "}
+                  </span>
+                </a>
+                <a href="/password">
+                  {" "}
+                  <span>
+                    {" "}
+                    <i class="fa fa-key" /> Change Password
+                  </span>
+                </a>
+
+              </div>
+            </div></li>
+            <li className="nav-item"><a class="nav-link" onClick={handleLogout}>
+              {" "}
+              <i class="fa fa-sign-out" /> Logout
+            </a></li></>
           ) : (
             /* // <>
             //   <a href="/profile">
@@ -82,8 +101,6 @@ export default function Navbar() {
               </li>
             </a>
           )}
-          
-          
         </ul>
       </div>
     </nav>
