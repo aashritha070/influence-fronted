@@ -8,8 +8,10 @@ import ViewPost from "./pages/viewPost/ViewPost.jsx";
 import WritePost from "./pages/WritePage/WritePage.jsx";
 import SignUp from "./pages/signupPage/SignupPage.jsx";
 import ProfileSettings from "./pages/ProfilePage/ProfilePage.jsx";
+import PasswordChange from "./pages/PasswordChange/PasswordChange";
 import Tags from "./pages/TagsPage/TagsPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DeleteUser from "./pages/DeletePage/DeletePage";
 
 function App() {
   // const { user } = useContext(Context);
@@ -22,6 +24,9 @@ function App() {
         <Route exact path="/tagSelect" element={<Tags />}></Route>
         <Route exact path="/writePost" element={<WritePost />}></Route>
         <Route exact path="/profile" element={<ProfileSettings />}></Route>
+        <Route exact path="/password" element={<PasswordChange />}></Route>
+        <Route exact path="/deleteUser" element={<DeleteUser />}></Route>
+
         <Route path="/posts/:postId" element={<ViewPost />}></Route>
       </Routes>
     </Router>

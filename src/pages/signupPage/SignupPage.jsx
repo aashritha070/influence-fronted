@@ -20,6 +20,7 @@ const Signup = () => {
       lastName: lastName,
       emailId: emailId,
       password: password,
+      tags: [],
     };
     console.log(userData);
     axios

@@ -16,10 +16,12 @@ export default function Home() {
   const[posts, setPosts]=useState([])
   const {search} = useLocation();
   const [tag, setTag] = useState([]);
+  const length = tag.length;
   
   useEffect(()=>{
     const renderBlog = async ()=>{
      const res = await axios.get("http://localhost:5000/posts"+ search)
+     console.log(res)
      setPosts(res.data)
     }
     renderBlog();
