@@ -3,23 +3,53 @@ import Form from "react-bootstrap/Form";
 import Navbar from "../../components/Navbar/Navbar";
 import React from "react";
 import axios from "axios";
+import ReactQuill from "react-quill";
+import { TagInput } from "evergreen-ui";
+import { TextInputField } from "evergreen-ui";
+import "react-quill/dist/quill.snow.css";
+import { Pane, FileUploader, FileCard } from "evergreen-ui";
 import { useState } from "react";
-import { useContext } from "react";
-import { Context } from "../../context/Context";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function WritePost() {
-  const [Title, settitle] = useState("");
-  const [description, setDesc] = useState("");
-  const [tags, setTags] = useState([]);
-  // const [userTag, setUserTag] = useState('');
-  const { user } = useContext(Context);
-  const navigate = useNavigate();
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [file, setFile] = useState(null);
+  const [convertedText, setConvertedText] = useState("Some default content");
+  const [files, setFiles] = React.useState([]);
+  const [fileRejections, setFileRejections] = React.useState([]);
+  const [allTags, setAllTags] = useState([]);
+  const handleChange = React.useCallback((files) => setFiles([files[0]]), []);
+  const [value, setValue] = React.useState("");
+  const handleRejected = React.useCallback(
+    (fileRejections) => setFileRejections([fileRejections[0]]),
+    []
+  );
+  const handleRemove = React.useCallback(() => {
+    setFiles([]);
+    setFileRejections([]);
+  }, []);
+
+  const [values, setValues] = React.useState(["First", "Second"]);
+
+  const allValues = React.useMemo(
+    () => [
+      "First",
+      "Second",
+      "Third",
+      "Fourth",
+      "Fifth",
+      "Sixth",
+      "Seventh",
+      "Eighth",
+      "Ninth",
+      "Tenth",
+    ],
+    []
+  );
+  const autocompleteItems = React.useMemo(
+    () => allValues.filter((i) => !values.includes(i)),
+    [allValues, values]
+  );
 
   const successToast = () => {
     toast.success("post has been added successfully!", {
@@ -33,130 +63,69 @@ export default function WritePost() {
     });
   };
 
-  useEffect(() => {
-    const getTag = async () => {
-      const res = await axios.get("http://localhost:5000/tag");
-      const tagsArray = [{ _id: "0", name: "Select one/many" }, ...res.data];
-      setTags(tagsArray);
-      console.log(tags);
-    };
-    getTag();
-  }, [tags]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const blog = {
-      username: user.username,
-      Title,
-      description,
-      tags: selectedTags,
-    };
-    console.log(blog);
-
-    if (file) {
-      const data = new FormData();
-      const filename = file.name;
-      data.append("name", filename);
-      data.append("file", file);
-      blog.coverPic = filename;
-      try {
-        await axios.post("/insert", data);
-      } catch (err) {}
-    }
-
-    await axios
-      .post("http://localhost:5000/posts/", blog)
-      .then((res) => {
-        console.log("hihih");
-        successToast();
-        return window.location.replace(`/posts/${res.data._id}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <div>
       <Navbar />
-
-      <div className="writePost">
-        <ToastContainer />
-        {file && (
-          <img className="writingImg" src={URL.createObjectURL(file)} alt="" />
-        )}
-
-        <form className="formInput" onSubmit={handleSubmit}>
-          <div className="imageArea">
-            <Form.Label htmlFor="fileInput" className="icon">
-              <i className="fa-solid fa-image"></i>
-            </Form.Label>
-            <input
-              type="file"
-              id="fileInput"
-              style={{ display: "none" }}
-              onChange={(e) => setFile(e.target.files[0])}
+      <ToastContainer />
+      <div className="write-wrapper">
+        <div className="image-container">
+          <Pane maxWidth={654}>
+            <FileUploader
+              label="Upload File"
+              description="You can upload 1 file. File can be up to 50 MB."
+              maxSizeInBytes={50 * 1024 ** 2}
+              maxFiles={1}
+              onChange={handleChange}
+              onRejected={handleRejected}
+              renderFile={(file) => {
+                const { name, size, type } = file;
+                const fileRejection = fileRejections.find(
+                  (fileRejection) => fileRejection.file === file
+                );
+                const { message } = fileRejection || {};
+                return (
+                  <FileCard
+                    key={name}
+                    isInvalid={fileRejection != null}
+                    name={name}
+                    onRemove={handleRemove}
+                    sizeInBytes={size}
+                    type={type}
+                    validationMessage={message}
+                  />
+                );
+              }}
+              values={files}
             />
-          </div>
-          <div className="tagsArea">
-            <div className="selectTags">
-              <select
-                className="dropdown_box"
-                value={" "}
-                onChange={(e) => {
-                  const selectedTag = e.target.value;
-                  setSelectedTags([...selectedTags, selectedTag]);
-                  const latestTags = tags.filter(
-                    (tag) => tag.name !== selectedTag
-                  );
-                  setTags(latestTags);
-                }}
-              >
-                {tags.map((c) => (
-                  <option key={c._id} value={c.name} className="dropdown">
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="selectedTags">
-              Selected tags:
-              {selectedTags.map((tag) => (
-                <span
-                  className="tagsSelected"
-                  style={{ color: "black" }}
-                  key={tag}
-                >
-                  {tag}{" "}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="contentArea">
-            <input id="fileInput" type="file" style={{ display: "none" }} />
-            <input
-              className="writeInput"
-              placeholder="Name it..."
-              type="text"
-              autoFocus={true}
-              onChange={(e) => settitle(e.target.value)}
-            />
-          </div>
-          <div className="contentArea">
-            <textarea
-              rows="50"
-              className="writeInput writeText"
-              placeholder="whats on your mind..."
-              type="text"
-              autoFocus={true}
-              onChange={(e) => setDesc(e.target.value)}
-            />
-          </div>
-          <button className="postBtn" type="submit">
-            post
-          </button>
-        </form>
+          </Pane>
+        </div>
+        <div className="tag-add-container">
+          <TagInput
+            inputProps={{ placeholder: "Enter something..." }}
+            values={values}
+            onChange={setValues}
+            autocompleteItems={autocompleteItems}
+          />
+        </div>
+        <div className="blot-title-container">
+        <TextInputField
+            placeholder="Title.."
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+          />
+        </div>
+        <div className="blog-edit-container">
+          <ReactQuill
+            theme="snow"
+            value={convertedText}
+            onChange={setConvertedText}
+            style={{ minHeight: "300px", maxHeight: "800px" }}
+          />
+        </div>
+        <div className="blog-write-btn">
+        <button className="blog-post-btn" >Post</button>
+        </div>
+       
       </div>
     </div>
   );

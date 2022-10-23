@@ -14,7 +14,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.reload(false);
+    return window.location.reload(false);
   };
 
   return (
@@ -56,32 +56,38 @@ export default function Navbar() {
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
           {token && token !== undefined ? (
-           <><li className="nav-item"> 
-           <div class="dropdown">
-              <button class="dropbtn">
-                <i class="fa fa-cog"></i>
-              </button>
-              <div class="dropdown-content">
-                <a href="/profile">
+            <>
+              <li className="nav-item">
+                <div class="dropdown">
+                  <button class="dropbtn">
+                    <span className="d-flex">
+                      <i className="fa mt-1 px-2 fa-cog"></i> Settings
+                    </span>
+                  </button>
+                  <div class="dropdown-content">
+                    <a href="/profile">
+                      {" "}
+                      <span>
+                        <i class="fa fa-user" /> My Profile{" "}
+                      </span>
+                    </a>
+                    <a href="/password">
+                      {" "}
+                      <span>
+                        {" "}
+                        <i class="fa fa-key" /> Change Password
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li className="nav-item">
+                <span className="d-flex nav-link" onClick={handleLogout}>
                   {" "}
-                  <span>
-                    <i class="fa fa-user" /> My Profile{" "}
-                  </span>
-                </a>
-                <a href="/password">
-                  {" "}
-                  <span>
-                    {" "}
-                    <i class="fa fa-key" /> Change Password
-                  </span>
-                </a>
-
-              </div>
-            </div></li>
-            <li className="nav-item"><a class="nav-link" onClick={handleLogout}>
-              {" "}
-              <i class="fa fa-sign-out" /> Logout
-            </a></li></>
+                  <i className="fa mt-1 px-1 fa-sign-out" /> Logout
+                </span>
+              </li>
+            </>
           ) : (
             /* // <>
             //   <a href="/profile">

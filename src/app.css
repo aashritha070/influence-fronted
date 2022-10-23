@@ -3,12 +3,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
   letter-spacing: 0.6px;
 }
 html {
   font-size: 16px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  background-color: var(--primary);
 }
 
 :root {
@@ -16,9 +16,6 @@ html {
   --primary: #1a2238;
   --highlight: #ff6a3d;
   --tertiary: #f4db7d;
-}
-body {
-  background: var(--primary) !important;
 }
 
 .container {
@@ -34,6 +31,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: var(--primary);
 }
 
 .logout-btn {
@@ -60,6 +58,8 @@ body {
   background: white;
   border-radius: 12px;
   padding: 50px;
+  margin-left: 100px;
+  margin-top: 100px;
 }
 
 .container-title {

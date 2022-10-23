@@ -8,46 +8,42 @@ import { useState } from "react";
 import axios from "axios";
 
 const PasswordChange = () => {
-  const [password, setPassword] = useState("");
-  //   const [newPassword, setNewPassword] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const jwtToken = localStorage.getItem("Token");
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    localStorage.clear();
-    const userData = {
-      password: password,
-    };
-    console.log(userData);
     axios
-      .put("http://localhost:5000/auth/signup", userData)
+      .post("http://localhost:5000/author/password", {
+        token: jwtToken,
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      })
       .then((response) => {
         console.log(response);
-        setRedirect(true);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  if (redirect) {
-    return <Navigate to="/" />;
-  }
+
   return (
     <div>
       <Navbar />
       <div className="home-container-password">
         <div className="container-content-password ">
           <p className="container-title-password">Change Password</p>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <div className="d-flex-column">
               <form className="mb-3 " controlId="firstName">
                 <Form.Label>Enter new password</Form.Label>
                 <Form.Control
                   className="inputBox"
                   type="text"
-                  placeholder="Enter first name"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter current password"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
                 />
               </form>
 
@@ -56,15 +52,15 @@ const PasswordChange = () => {
                 <Form.Control
                   className="inputBox"
                   type="text"
-                  placeholder="Enter last name"
-                  //   value={lastName}
-                  //   onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Enter new password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
                 />
               </form>
             </div>
 
-            <Button className="button-password" type="submit">
-              Save Changes
+            <Button className="button-password" onClick={handleUpdate}>
+              Update Password
             </Button>
           </Form>
         </div>

@@ -3,22 +3,24 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
 import Navbar from "../../components/Navbar/Navbar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/footer/Footer";
-import "./home.css";
+import "./BlogList.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
-export default function Home() {
+export default function blogsList() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [blogsByTag, setblogsByTag] = useState([]);
-  const [allBlogs, setAllBlogs] = useState([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [allTags, setAllTags] = useState([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isload, setIsLoad] = useState(false);
   const jwtToken = {
     token: localStorage.getItem("Token"),
   };
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     setIsLoad(true);
     const fetchBlogsByTags = async () => {
@@ -37,19 +39,6 @@ export default function Home() {
         });
     };
     fetchBlogsByTags();
-
-    const fetchAllBlogs = async () => {
-      await axios
-        .post("http://localhost:5000/blog/all", jwtToken)
-        .then((res) => {
-          console.log("fetchAllBlogs", res);
-          setAllBlogs(res.data.data);
-        })
-        .catch((err) => {
-          console.log("fetchAllBlogs", err);
-        });
-    };
-    fetchAllBlogs();
 
     const fetchAllTags = async () => {
       await axios
@@ -95,7 +84,7 @@ export default function Home() {
           </div>
         </div>
         <div className="home-content">
-          <span className="home-subtitle">Top picks for you!</span>
+          <span className="home-subtitle">Here is your find..</span>
           <div className="d-flex  gap-5 mt-3">
             {blogsByTag.map((blog) => (
               <Card style={{ width: "20rem" }}>
@@ -122,27 +111,6 @@ export default function Home() {
               <button className="tag-button" onClick={handleTagSelect}>
                 {tag.label}
               </button>
-            ))}
-          </div>
-        </div>
-        <div className="home-content">
-          <span className="home-subtitle">Explore more</span>
-          <div className="d-flex gap-5 mt-3">
-            {allBlogs.map((blog) => (
-              <Card style={{ width: "20rem" }}>
-                {blog.coverPic ? (
-                  <Card.Img variant="top" src={defaultBlogCoverPic} />
-                ) : (
-                  <Card.Img variant="top" src={defaultBlogCoverPic} />
-                )}
-                <Card.Body>
-                  <Card.Title>{blog.title}</Card.Title>
-                  <Card.Text>{blog.content}</Card.Text>
-                  <a href="/viewpost">
-                    <Button variant="primary">read more</Button>
-                  </a>
-                </Card.Body>
-              </Card>
             ))}
           </div>
         </div>

@@ -1,13 +1,14 @@
 // import React, { useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
-import '@coreui/coreui/dist/css/coreui.min.css'
+import "@coreui/coreui/dist/css/coreui.min.css";
 import "./App.css";
 import Home from "./pages/HomePage/HomePage.jsx";
 import Login from "./pages/LoginPage/LoginPage.jsx";
 import ViewPost from "./pages/viewPost/ViewPost.jsx";
 import WritePost from "./pages/WritePage/WritePage.jsx";
 import SignUp from "./pages/signupPage/SignupPage.jsx";
+import BlogList from "./pages/BlogList/BlogList";
 import ProfileSettings from "./pages/ProfilePage/ProfilePage.jsx";
 import PasswordChange from "./pages/PasswordChange/PasswordChange";
 import Tags from "./pages/TagsPage/TagsPage";
@@ -27,7 +28,8 @@ function App() {
         <Route exact path="/profile" element={<ProfileSettings />}></Route>
         <Route exact path="/password" element={<PasswordChange />}></Route>
         <Route exact path="/deleteUser" element={<DeleteUser />}></Route>
-
+        <Route exact path="/view" element={<ViewPost />}></Route>
+        <Route exact path="/blogsview" element={<BlogList />}></Route>
         <Route path="/posts/:postId" element={<ViewPost />}></Route>
       </Routes>
     </Router>
