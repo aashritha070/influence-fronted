@@ -12,6 +12,8 @@ const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const[tags, setTags]=useState([null])
+  const length=tags.length
   const [redirect, setRedirect] = useState(false);
 
   const successToast = () =>
@@ -45,8 +47,9 @@ const errorToast = () =>
       lastName: lastName,
       emailId: emailId,
       password: password,
-      tags: [],
+      tags:[],
     };
+  
     console.log(userData);
     axios
       .post("http://localhost:5000/auth/signup", userData)
@@ -63,6 +66,9 @@ const errorToast = () =>
   };
   if (redirect) {
     return <Navigate to="/" />;
+  }
+  if(length(tags)===0){
+    return  <Navigate to="/tagSelect" />
   }
   return (
     <div className="home-container">

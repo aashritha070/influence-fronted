@@ -1,7 +1,8 @@
-// import React, { useContext } from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
+import "./main.css";
 
 import Home from "./pages/HomePage/HomePage.jsx";
 import Login from "./pages/LoginPage/LoginPage.jsx";
@@ -14,11 +15,9 @@ import PasswordChange from "./pages/PasswordChange/PasswordChange";
 import Tags from "./pages/TagsPage/TagsPage";
 
 
-import "./App.css";
-
 function App() {
-  // const { user } = useContext(Context);
   return (
+<<<<<<< HEAD
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
@@ -33,10 +32,26 @@ function App() {
         <Route path="/posts/:postId" element={<ViewPost />}></Route>
       </Routes>
     </Router>
+=======
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/signup" element={<SignUp />}></Route>
+          <Route exact path="/tagselect" element={<Tags />}></Route>
+          <Route exact path="/writePost" element={<WritePost />}></Route>
+          <Route exact path="/profile" element={<ProfileSettings />}></Route>
+          <Route exact path="/password" element={<PasswordChange />}></Route>
+          <Route exact path="/deleteUser" element={<DeleteUser />}></Route>
+          <Route exact path="/view" element={<ViewPost />}></Route>
+          <Route exact path="/blogsview/:key/:value" element={<BlogList />}></Route>
+          <Route path="/posts/:postId" element={<ViewPost />}></Route>
+        </Routes>
+      </Router>
+    </div>
+>>>>>>> 88408f051fb67192e760ba27d512895d1b905ce9
   );
 }
 
 export default App;
-
-//mongodb+srv://aashritha:<password>@influence-cluster.fjxcn84.mongodb.net/?retryWrites=true&w=majority
-//work on sending username/id in backend.
