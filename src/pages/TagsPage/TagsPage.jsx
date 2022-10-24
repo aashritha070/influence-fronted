@@ -1,5 +1,5 @@
 import "./TagsPage.css";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import Form from "react-bootstrap/Form";
 function Tags() {
   return (

@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./ProfilePage.css";
 // import '../DeletePage/DeletePage'
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import { React, useEffect } from "react";
 import { useState } from "react";

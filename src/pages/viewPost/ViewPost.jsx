@@ -1,7 +1,7 @@
 import React from 'react'
 import {useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 import './viewPost.css';
 export default function viewPost() {

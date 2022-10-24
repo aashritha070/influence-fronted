@@ -1,4 +1,4 @@
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import React from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";

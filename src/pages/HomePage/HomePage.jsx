@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import Navbar from "../../components/Navbar/Navbar";
-import Header from "../../components/Header/Header";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 import "./home.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
