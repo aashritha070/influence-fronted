@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
-import "./App.css";
+import "./main.css";
 
 import Home from "./pages/HomePage/HomePage.jsx";
 import Login from "./pages/LoginPage/LoginPage.jsx";
