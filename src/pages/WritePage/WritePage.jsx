@@ -119,12 +119,13 @@ export default function WritePost() {
           </Pane>
         </div>
         <div className="tag-add-container">
-          <TagInput
+          <h6 className="tag-add-title">Please choose the categories</h6>
+         <p><TagInput
             inputProps={{ placeholder: "Enter something..." }}
             values={values}
             onChange={setValues}
             autocompleteItems={autocompleteItems}
-          />
+          /></p> 
         </div>
         <div className="blog-title-container">
           <TextInputField

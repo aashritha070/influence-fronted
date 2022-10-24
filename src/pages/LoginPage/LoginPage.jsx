@@ -12,6 +12,17 @@ function Login() {
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   
+  const successToast = () =>
+    toast.success("Account Successfully logged in!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+
   const wrongCred = () =>
     toast.error("Enter valid login credentials!", {
       position: "top-right",
@@ -35,6 +46,7 @@ function Login() {
       .then((response) => {
         localStorage.setItem("Token", response.data.authToken);
         console.log(response);
+        successToast();
         setRedirect(true);
       })
       .catch((error) => {

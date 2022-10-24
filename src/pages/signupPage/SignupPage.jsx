@@ -4,6 +4,8 @@ import { Navigate } from "react-router-dom";
 import { React } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +13,29 @@ const Signup = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+
+  const successToast = () =>
+  toast.success("User Successfully added!", {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+  });
+
+const errorToast = () =>
+  toast.error("User already exists!", {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+  });
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,10 +53,12 @@ const Signup = () => {
       .then((response) => {
         localStorage.setItem("Token", response.data.authToken);
         console.log("response quote", response);
+        successToast();
         setRedirect(true);
       })
       .catch((error) => {
         console.log(error);
+        errorToast();
       });
   };
   if (redirect) {
@@ -39,6 +66,7 @@ const Signup = () => {
   }
   return (
     <div className="home-container">
+      <ToastContainer />
       <div className="container-content">
         <p className="container-title">Create Account</p>
         <Form onSubmit={handleSubmit}>

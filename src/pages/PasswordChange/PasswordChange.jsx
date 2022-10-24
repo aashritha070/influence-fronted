@@ -10,7 +10,10 @@ import axios from "axios";
 const PasswordChange = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+
   const jwtToken = localStorage.getItem("Token");
+
+  
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -22,6 +25,7 @@ const PasswordChange = () => {
       })
       .then((response) => {
         console.log(response);
+
       })
       .catch((error) => {
         console.log(error);

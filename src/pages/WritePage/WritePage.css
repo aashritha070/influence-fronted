@@ -9,9 +9,15 @@
 .image-container Pane {
   width: 100%;
 }
+.tag-add-title {
+  
+  color: var(--highlight);
+}
 
 .tag-add-container {
-  margin: 5% 8% 0px 33%;
+  margin-top: 2%;
+  margin-right: 33%;
+  margin-left: 8%;
 }
 
 .tag-add-container TagInput {

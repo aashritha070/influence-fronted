@@ -21,7 +21,7 @@ export default function viewPost() {
       </div>
        
       <div className="blogChanges">
-              <span className="blogEdit" >
+              <span className="blogEdit">
               <i class="fa fa-edit"></i>
               </span>
               <span className="blogDelete">
