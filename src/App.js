@@ -1,7 +1,8 @@
-// import React, { useContext } from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
+import "./App.css";
 
 import Home from "./pages/HomePage/HomePage.jsx";
 import Login from "./pages/LoginPage/LoginPage.jsx";
@@ -15,7 +16,6 @@ import Tags from "./pages/TagsPage/TagsPage";
 import DeleteUser from "./pages/DeletePage/DeletePage";
 
 function App() {
-  // const { user } = useContext(Context);
   return (
     <Router>
       <Routes>
