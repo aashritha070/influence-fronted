@@ -5,9 +5,9 @@ import ReactQuill from "react-quill";
 import { TagInput } from "evergreen-ui";
 import { TextInputField } from "evergreen-ui";
 import { Pane, FileUploader, FileCard } from "evergreen-ui";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { ToastContainer, toast } from "react-toastify";
+
 
 import "react-quill/dist/quill.snow.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,23 +16,19 @@ import { Button } from "react-bootstrap";
 
 export default function WritePost() {
   const [convertedText, setConvertedText] = useState("Some default content");
-  const [files, setFiles] = React.useState([]);
-  const [fileRejections, setFileRejections] = React.useState([]);
+  const [files, setFiles] = useState([]);
+  const [fileRejections, setFileRejections] = useState([]);
   const [allTags, setAllTags] = useState([]);
-  const handleChange = React.useCallback((files) => setFiles([files[0]]), []);
-  const [value, setValue] = React.useState("");
-  const handleRejected = React.useCallback(
-    (fileRejections) => setFileRejections([fileRejections[0]]),
-    []
-  );
-  const handleRemove = React.useCallback(() => {
-    setFiles([]);
-    setFileRejections([]);
-  }, []);
+  const [value, setValue] = useState("");
+  const jwtToken = localStorage.getItem("Token")
 
-  const [values, setValues] = React.useState(["First", "Second"]);
+  const handleCoverPicUpload = useCallback((files) => setFiles([files[0]]), []);
+  const handleCoverPicRejected = useCallback((fileRejections) => setFileRejections([fileRejections[0]]), []);
+  const handleRemove = useCallback(() => { setFiles([]); setFileRejections([]); }, []);
 
-  const allValues = React.useMemo(
+  const [values, setValues] = useState([]);
+
+  const allValues = useMemo(
     () => [
       "First",
       "Second",
@@ -47,7 +43,8 @@ export default function WritePost() {
     ],
     []
   );
-  const autocompleteItems = React.useMemo(
+
+  const autocompleteItems = useMemo(
     () => allValues.filter((i) => !values.includes(i)),
     [allValues, values]
   );
@@ -64,6 +61,27 @@ export default function WritePost() {
     });
   };
 
+
+  const handleCoverPicSubmit = async () => {
+    let data = new FormData();
+    data.append("file", files[0]);
+    data.append("token", jwtToken);
+    console.log("handleCoverPicSubmit", data)
+    await axios
+      .post("http://localhost:5000/blog/upload", data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((res) => {
+        console.log("handleCoverPicSubmit", res);
+      })
+      .catch((err) => {
+        console.log("handleCoverPicSubmit", err);
+      });
+
+  }
+
   return (
     <div>
       <Navbar />
@@ -72,12 +90,12 @@ export default function WritePost() {
         <div className="image-container">
           <Pane>
             <FileUploader
-              label="Upload File"
+              label="Upload your blog's cover image"
               description="You can upload 1 file. File can be up to 50 MB."
               maxSizeInBytes={50 * 1024 ** 2}
               maxFiles={1}
-              onChange={handleChange}
-              onRejected={handleRejected}
+              onChange={handleCoverPicUpload}
+              onRejected={handleCoverPicRejected}
               renderFile={(file) => {
                 const { name, size, type } = file;
                 const fileRejection = fileRejections.find(
@@ -126,7 +144,7 @@ export default function WritePost() {
           />
         </div>
         <div className="blog-footer-container">
-          <Button>Post my blog</Button>
+          <Button onClick={handleCoverPicSubmit}>Post my blog</Button>
         </div>
       </div>
     </div>
