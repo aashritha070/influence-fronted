@@ -2,7 +2,7 @@ import React from "react"
 
 import "./Header.css"
 
-export default function Header() {
+function Header() {
   return (
     <div className='header-wrapper'>
       <div className="headerTitle">
@@ -13,3 +13,5 @@ export default function Header() {
     </div>
   )
 }
+
+export default Header;
