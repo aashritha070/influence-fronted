@@ -15,13 +15,13 @@ import "./WritePage.css";
 import { Button } from "react-bootstrap";
 
 export default function WritePost() {
-  const [convertedText, setConvertedText] = useState("Some default content");
   const [files, setFiles] = useState([]);
   const [fileRejections, setFileRejections] = useState([]);
   const [allTags, setAllTags] = useState([]);
   const [isLoad, setIsLoad] = useState('false')
   const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
+  const [coverPicId, setCoverPicId] = useState("");
   const jwtToken = localStorage.getItem("Token")
   const handleCoverPicUpload = useCallback((files) => setFiles([files[0]]), []);
   const handleCoverPicRejected = useCallback((fileRejections) => setFileRejections([fileRejections[0]]), []);
@@ -68,18 +68,23 @@ export default function WritePost() {
         }
       })
       .then((res) => {
+        setCoverPicId(res.data.data._id)
         console.log("handleCoverPicSubmit", res);
       })
       .catch((err) => {
         console.log("handleCoverPicSubmit", err);
       });
-    
+
+    const newBlog = {
+      title: blogTitle,
+      content: blogContent,
+      coverPic: coverPicId,
+      tags: values,
+      token: jwtToken
+    }
+
     await axios
-      .post("http://localhost:5000/blog/create", {
-        headers: {
-          "x-access-token": jwtToken
-        }
-      })
+      .post("http://localhost:5000/blog/create", newBlog)
       .then((res) => {
         console.log("handleCoverPicSubmit", res);
       })
@@ -88,11 +93,6 @@ export default function WritePost() {
       });
 
   }
-
-  const autocompleteItems = useMemo(
-    () => allTagLabels.filter((i) => !values.includes(i)),
-    [allTagLabels, values]
-  );
 
   useEffect(() => {
     setIsLoad(true);
@@ -111,7 +111,7 @@ export default function WritePost() {
     fetchAllTags();
 
     setIsLoad(false);
-  }, []);
+  }, [allTagLabels]);
 
   if (isLoad) {
     return <div></div>
@@ -154,17 +154,17 @@ export default function WritePost() {
         </div>
         <div className="tag-add-container">
           <h6 className="tag-add-title">Please choose the categories</h6>
-         <p><TagInput
-            inputProps={{ placeholder: "Enter something..." }}
+          <TagInput
+            inputProps={{ placeholder: "Enter categories" }}
             values={values}
             onChange={setValues}
-            autocompleteItems={autocompleteItems}
-          /></p> 
+            autocompleteItems={allTagLabels}
+          />
         </div>
         <div className="blog-title-container">
           <TextInputField
             inputHeight={40}
-            placeholder="Title.."
+            label="Title"
             className="eg-textInput"
             onChange={(e) => setBlogTitle(e.target.value)}
             value={blogTitle}

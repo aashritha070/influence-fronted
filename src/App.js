@@ -30,7 +30,7 @@ function App() {
         <Route exact path="/password" element={<PasswordChange />}></Route>
         <Route exact path="/deleteUser" element={<DeleteUser />}></Route>
         <Route exact path="/view" element={<ViewPost />}></Route>
-        <Route exact path="/blogsview" element={<BlogList />}></Route>
+        <Route exact path="/blogsview/:key/:value" element={<BlogList />}></Route>
         <Route path="/posts/:postId" element={<ViewPost />}></Route>
       </Routes>
     </Router>

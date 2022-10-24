@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom'
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
@@ -10,28 +11,21 @@ import Header from "../../components/Header/Header";
 import "./BlogList.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
-export default function blogsList() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [blogsByTag, setblogsByTag] = useState([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [allTags, setAllTags] = useState([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isload, setIsLoad] = useState(false);
-  const jwtToken = {
-    token: localStorage.getItem("Token"),
-  };
+const BlogList = () => {
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [blogsByTag, setblogsByTag] = React.useState([]);
+  const [allTags, setAllTags] = useState([]);
+  const [isload, setIsLoad] = useState(false);
+  const { key, value } = useParams();
+  const jwtToken = localStorage.getItem("Token");
+
   useEffect(() => {
     setIsLoad(true);
-    const fetchBlogsByTags = async () => {
-      console.log("jwtToken", jwtToken);
+    const fetchBlogsByTag = async () => {
+      console.log("jwtToken", key, value);
       await axios
-        .post("http://localhost:5000/blog/tag", jwtToken)
+        .post("http://localhost:5000/blog/selectedtag", { token: jwtToken, tag: value })
         .then((res) => {
-          if (res.data?.message === "No tags available") {
-            return window.location.replace("/tagselect");
-          }
           console.log("fetchBlogsByTags", res);
           setblogsByTag(res.data.data);
         })
@@ -39,11 +33,26 @@ export default function blogsList() {
           console.log("fetchBlogsByTags", err);
         });
     };
-    fetchBlogsByTags();
+
+    const fetchBlogsByAuthor = async () => {
+      console.log("jwtToken", key, value);
+      await axios
+        .post("http://localhost:5000/blog/author", { token: jwtToken, authorEmailId: value })
+        .then((res) => {
+          console.log("fetchBlogsByTags", res);
+          setblogsByTag(res.data.data);
+        })
+        .catch((err) => {
+          console.log("fetchBlogsByTags", err);
+        });
+    };
+
+    if (key === 'tags') fetchBlogsByTag();
+    else if (key === 'author') fetchBlogsByAuthor();
 
     const fetchAllTags = async () => {
       await axios
-        .post("http://localhost:5000/tags", jwtToken)
+        .post("http://localhost:5000/tags", { token: jwtToken })
         .then((res) => {
           console.log("fetchAllTags", res);
           setAllTags(res.data.tags);
@@ -119,3 +128,5 @@ export default function blogsList() {
     </div>
   );
 }
+
+export default BlogList;
