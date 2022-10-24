@@ -17,25 +17,24 @@ import DeleteUser from "./pages/DeletePage/DeletePage";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Home />}></Route>
-        <Route exact path="/login" element={<Login />}></Route>
-        <Route exact path="/signup" element={<SignUp />}></Route>
-        <Route exact path="/tagselect" element={<Tags />}></Route>
-        <Route exact path="/writePost" element={<WritePost />}></Route>
-        <Route exact path="/profile" element={<ProfileSettings />}></Route>
-        <Route exact path="/password" element={<PasswordChange />}></Route>
-        <Route exact path="/deleteUser" element={<DeleteUser />}></Route>
-        <Route exact path="/view" element={<ViewPost />}></Route>
-        <Route exact path="/blogsview/:key/:value" element={<BlogList />}></Route>
-        <Route path="/posts/:postId" element={<ViewPost />}></Route>
-      </Routes>
-    </Router>
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/signup" element={<SignUp />}></Route>
+          <Route exact path="/tagselect" element={<Tags />}></Route>
+          <Route exact path="/writePost" element={<WritePost />}></Route>
+          <Route exact path="/profile" element={<ProfileSettings />}></Route>
+          <Route exact path="/password" element={<PasswordChange />}></Route>
+          <Route exact path="/deleteUser" element={<DeleteUser />}></Route>
+          <Route exact path="/view" element={<ViewPost />}></Route>
+          <Route exact path="/blogsview/:key/:value" element={<BlogList />}></Route>
+          <Route path="/posts/:postId" element={<ViewPost />}></Route>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
 export default App;
-
-//mongodb+srv://aashritha:<password>@influence-cluster.fjxcn84.mongodb.net/?retryWrites=true&w=majority
-//work on sending username/id in backend.
