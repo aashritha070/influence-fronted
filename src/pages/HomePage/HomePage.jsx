@@ -1,16 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import Navbar from "../../components/Navbar/Navbar";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/footer/Footer";
+import { Navbar } from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 import "./home.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
-function Home() {
+export default function Home() {
   const [blogsByTag, setblogsByTag] = useState([]);
   const [allBlogs, setAllBlogs] = useState([]);
   const [allTags, setAllTags] = useState([]);
@@ -150,4 +149,3 @@ function Home() {
     </div>
   );
 }
-export default  Home;

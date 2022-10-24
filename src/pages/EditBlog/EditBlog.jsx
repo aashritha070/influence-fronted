@@ -1,4 +1,4 @@
-import Navbar from "../../components/Navbar/Navbar";
+import { Navbar } from "../../components/Navbar/Navbar";
 import React from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
@@ -78,7 +78,6 @@ function WritePost() {
     [allValues, values]
   );
 
- 
   const handleCoverPicSubmit = async () => {
     let data = new FormData();
     data.append("file", files[0]);
@@ -171,4 +170,4 @@ function WritePost() {
     </div>
   );
 }
-export default  WritePost;
+export default WritePost;

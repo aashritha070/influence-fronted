@@ -17,6 +17,8 @@
     "countapi-js": "^1.0.2",
     "draft-js": "^0.11.7",
     "evergreen-ui": "^6.10.5",
+    "FormData": "^0.10.1",
+    "fs": "^0.0.1-security",
     "jquery": "^3.6.1",
     "material-icons-react": "^1.0.4",
     "mdb-react-ui-kit": "^4.2.0",

@@ -1,14 +1,6 @@
 import "./Navbar.css";
 import React from "react";
-
-<<<<<<< HEAD
-import Context from "../../context/Context";
-import { Link } from "react-router-dom";
- function Navbar() {
-=======
-
 function Navbar() {
->>>>>>> 88408f051fb67192e760ba27d512895d1b905ce9
   const token = localStorage.getItem("Token");
 
   if (!token || token === "undefined") {

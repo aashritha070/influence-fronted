@@ -1,43 +1,32 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import Navbar from "../../components/navbar/Navbar";
+import { Navbar } from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 
 import "./BlogList.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
-<<<<<<< HEAD
-function blogsList() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [blogsByTag, setblogsByTag] = useState([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [allTags, setAllTags] = useState([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isload, setIsLoad] = useState(false);
-  const jwtToken = {
-    token: localStorage.getItem("Token"),
-  };
-=======
 const BlogList = () => {
-
   const [blogsByTag, setblogsByTag] = React.useState([]);
   const [allTags, setAllTags] = useState([]);
   const [isload, setIsLoad] = useState(false);
   const { key, value } = useParams();
   const jwtToken = localStorage.getItem("Token");
->>>>>>> 88408f051fb67192e760ba27d512895d1b905ce9
 
   useEffect(() => {
     setIsLoad(true);
     const fetchBlogsByTag = async () => {
       console.log("jwtToken", key, value);
       await axios
-        .post("http://localhost:5000/blog/selectedtag", { token: jwtToken, tag: value })
+        .post("http://localhost:5000/blog/selectedtag", {
+          token: jwtToken,
+          tag: value,
+        })
         .then((res) => {
           console.log("fetchBlogsByTags", res);
           setblogsByTag(res.data.data);
@@ -50,7 +39,10 @@ const BlogList = () => {
     const fetchBlogsByAuthor = async () => {
       console.log("jwtToken", key, value);
       await axios
-        .post("http://localhost:5000/blog/author", { token: jwtToken, authorEmailId: value })
+        .post("http://localhost:5000/blog/author", {
+          token: jwtToken,
+          authorEmailId: value,
+        })
         .then((res) => {
           console.log("fetchBlogsByTags", res);
           setblogsByTag(res.data.data);
@@ -60,8 +52,8 @@ const BlogList = () => {
         });
     };
 
-    if (key === 'tags') fetchBlogsByTag();
-    else if (key === 'author') fetchBlogsByAuthor();
+    if (key === "tags") fetchBlogsByTag();
+    else if (key === "author") fetchBlogsByAuthor();
 
     const fetchAllTags = async () => {
       await axios
@@ -140,10 +132,6 @@ const BlogList = () => {
       </div>
     </div>
   );
-}
-<<<<<<< HEAD
-export default blogsList;
-=======
+};
 
 export default BlogList;
->>>>>>> 88408f051fb67192e760ba27d512895d1b905ce9

@@ -1,6 +1,6 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import React from "react";
+import {Button} from "react-bootstrap/Button";
+import {Form} from "react-bootstrap/Form";
+import {React} from "react";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
