@@ -1,8 +1,8 @@
 // import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
-import "@coreui/coreui/dist/css/coreui.min.css";
-import "./App.css";
+
 import Home from "./pages/HomePage/HomePage.jsx";
 import Login from "./pages/LoginPage/LoginPage.jsx";
 import ViewPost from "./pages/viewPost/ViewPost.jsx";
@@ -12,8 +12,9 @@ import BlogList from "./pages/BlogList/BlogList";
 import ProfileSettings from "./pages/ProfilePage/ProfilePage.jsx";
 import PasswordChange from "./pages/PasswordChange/PasswordChange";
 import Tags from "./pages/TagsPage/TagsPage";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DeleteUser from "./pages/DeletePage/DeletePage";
+
+import "./App.css";
 
 function App() {
   // const { user } = useContext(Context);

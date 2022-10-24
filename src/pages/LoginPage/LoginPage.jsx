@@ -79,7 +79,7 @@ function Login() {
 
            
 
-            <Button className="button" type="submit">
+            <Button className="auth-button" type="submit">
               Login
             </Button>
 

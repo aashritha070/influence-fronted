@@ -1,17 +1,18 @@
-import "./WritePage.css";
-import Form from "react-bootstrap/Form";
 import Navbar from "../../components/Navbar/Navbar";
 import React from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
 import { TagInput } from "evergreen-ui";
 import { TextInputField } from "evergreen-ui";
-import "react-quill/dist/quill.snow.css";
 import { Pane, FileUploader, FileCard } from "evergreen-ui";
 import { useState } from "react";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+
+import "react-quill/dist/quill.snow.css";
 import "react-toastify/dist/ReactToastify.css";
+import "./WritePage.css";
+import { Button } from "react-bootstrap";
 
 export default function WritePost() {
   const [convertedText, setConvertedText] = useState("Some default content");
@@ -69,7 +70,7 @@ export default function WritePost() {
       <ToastContainer />
       <div className="write-wrapper">
         <div className="image-container">
-          <Pane maxWidth={654}>
+          <Pane>
             <FileUploader
               label="Upload File"
               description="You can upload 1 file. File can be up to 50 MB."
@@ -107,9 +108,11 @@ export default function WritePost() {
             autocompleteItems={autocompleteItems}
           />
         </div>
-        <div className="blot-title-container">
-        <TextInputField
+        <div className="blog-title-container">
+          <TextInputField
+            inputHeight={40}
             placeholder="Title.."
+            className="eg-textInput"
             onChange={(e) => setValue(e.target.value)}
             value={value}
           />
@@ -119,13 +122,12 @@ export default function WritePost() {
             theme="snow"
             value={convertedText}
             onChange={setConvertedText}
-            style={{ minHeight: "300px", maxHeight: "800px" }}
+            style={{ minHeight: "fit-content" }}
           />
         </div>
-        <div className="blog-write-btn">
-        <button className="blog-post-btn" >Post</button>
+        <div className="blog-footer-container">
+          <Button>Post my blog</Button>
         </div>
-       
       </div>
     </div>
   );

@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@coreui/coreui": "^4.2.2",
-    "@coreui/react": "^4.4.0",
-    "@popperjs/core": "^2.11.6",
     "@syncfusion/ej2-base": "^20.3.50",
     "@syncfusion/ej2-react-splitbuttons": "^20.3.47",
     "@testing-library/jest-dom": "^5.16.5",
