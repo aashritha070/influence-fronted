@@ -19,38 +19,19 @@ export default function WritePost() {
   const [files, setFiles] = useState([]);
   const [fileRejections, setFileRejections] = useState([]);
   const [allTags, setAllTags] = useState([]);
-  const [value, setValue] = useState("");
+  const [isLoad, setIsLoad] = useState('false')
+  const [blogTitle, setBlogTitle] = useState("");
+  const [blogContent, setBlogContent] = useState("");
   const jwtToken = localStorage.getItem("Token")
-
   const handleCoverPicUpload = useCallback((files) => setFiles([files[0]]), []);
   const handleCoverPicRejected = useCallback((fileRejections) => setFileRejections([fileRejections[0]]), []);
   const handleRemove = useCallback(() => { setFiles([]); setFileRejections([]); }, []);
 
   const [values, setValues] = useState([]);
+  const [allTagLabels, setAllTagLabels] = useState([]);
 
-  const allValues = useMemo(
-    () => [
-      "First",
-      "Second",
-      "Third",
-      "Fourth",
-      "Fifth",
-      "Sixth",
-      "Seventh",
-      "Eighth",
-      "Ninth",
-      "Tenth",
-    ],
-    []
-  );
-
-  const autocompleteItems = useMemo(
-    () => allValues.filter((i) => !values.includes(i)),
-    [allValues, values]
-  );
-
-  const successToast = () => {
-    toast.success("post has been added successfully!", {
+  const successToast = (message) => {
+    toast.success(message, {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -61,16 +42,42 @@ export default function WritePost() {
     });
   };
 
+  const errorToast = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+  };
 
-  const handleCoverPicSubmit = async () => {
-    let data = new FormData();
-    data.append("file", files[0]);
-    data.append("token", jwtToken);
-    console.log("handleCoverPicSubmit", data)
+  const handleBlogPost = async () => {
+    const formData = new FormData();
+    formData.append('coverPic', files[0], files[0].name)
+    formData.append('token', jwtToken)
+    console.log("handleCoverPicSubmit", formData)
+    console.log("blogTitle, blogContent", blogTitle, blogContent)
+
     await axios
-      .post("http://localhost:5000/blog/upload", data, {
+      .post("http://localhost:5000/blog/upload", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          "x-access-token": jwtToken
+        }
+      })
+      .then((res) => {
+        console.log("handleCoverPicSubmit", res);
+      })
+      .catch((err) => {
+        console.log("handleCoverPicSubmit", err);
+      });
+    
+    await axios
+      .post("http://localhost:5000/blog/create", {
+        headers: {
+          "x-access-token": jwtToken
         }
       })
       .then((res) => {
@@ -82,6 +89,33 @@ export default function WritePost() {
 
   }
 
+  const autocompleteItems = useMemo(
+    () => allTagLabels.filter((i) => !values.includes(i)),
+    [allTagLabels, values]
+  );
+
+  useEffect(() => {
+    setIsLoad(true);
+
+    const fetchAllTags = async () => {
+      await axios
+        .post("http://localhost:5000/tags", { token: jwtToken })
+        .then((res) => {
+          setAllTags(res.data.tags)
+          setAllTagLabels(allTags.map((tag) => tag['label']))
+        })
+        .catch((err) => {
+          console.log("fetchAllTags", err);
+        });
+    };
+    fetchAllTags();
+
+    setIsLoad(false);
+  }, []);
+
+  if (isLoad) {
+    return <div></div>
+  }
   return (
     <div>
       <Navbar />
@@ -132,20 +166,20 @@ export default function WritePost() {
             inputHeight={40}
             placeholder="Title.."
             className="eg-textInput"
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
+            onChange={(e) => setBlogTitle(e.target.value)}
+            value={blogTitle}
           />
         </div>
         <div className="blog-edit-container">
           <ReactQuill
             theme="snow"
-            value={convertedText}
-            onChange={setConvertedText}
+            value={blogContent}
+            onChange={setBlogContent}
             style={{ minHeight: "fit-content" }}
           />
         </div>
         <div className="blog-footer-container">
-          <Button onClick={handleCoverPicSubmit}>Post my blog</Button>
+          <Button onClick={handleBlogPost}>Post my blog</Button>
         </div>
       </div>
     </div>
