@@ -14,8 +14,6 @@ import PasswordChange from "./pages/PasswordChange/PasswordChange";
 import Tags from "./pages/TagsPage/TagsPage";
 import DeleteUser from "./pages/DeletePage/DeletePage";
 
-import "./App.css";
-
 function App() {
   // const { user } = useContext(Context);
   return (
