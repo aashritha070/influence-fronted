@@ -10,7 +10,7 @@ import Header from "../../components/Header/Header";
 import "./BlogList.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
-export default function blogsList() {
+function blogsList() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [blogsByTag, setblogsByTag] = useState([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -119,3 +119,4 @@ export default function blogsList() {
     </div>
   );
 }
+export default blogsList;

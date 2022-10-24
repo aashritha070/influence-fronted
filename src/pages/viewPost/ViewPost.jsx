@@ -4,7 +4,7 @@ import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 import './viewPost.css';
-export default function viewPost() {
+function viewPost() {
 
   const [title, setTitle]=useState
 
@@ -59,3 +59,5 @@ export default function viewPost() {
     </div>
  
   )};
+
+  export default viewPost;

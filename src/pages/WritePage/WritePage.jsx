@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./WritePage.css";
 import { Button } from "react-bootstrap";
 
-export default function WritePost() {
+function WritePost() {
   const [convertedText, setConvertedText] = useState("Some default content");
   const [files, setFiles] = useState([]);
   const [fileRejections, setFileRejections] = useState([]);
@@ -185,3 +185,4 @@ export default function WritePost() {
     </div>
   );
 }
+export default  WritePost;

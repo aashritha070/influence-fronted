@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./WritePage.css";
 import { Button } from "react-bootstrap";
 
-export default function WritePost() {
+function WritePost() {
   const [convertedText, setConvertedText] = useState("Some default content");
   const [files, setFiles] = useState([]);
   const [fileRejections, setFileRejections] = useState([]);
@@ -32,6 +32,30 @@ export default function WritePost() {
   }, []);
 
   const [values, setValues] = useState([]);
+
+  const successToast = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+  };
+
+  const errorToast = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+  };
 
   const allValues = useMemo(
     () => [
@@ -54,18 +78,7 @@ export default function WritePost() {
     [allValues, values]
   );
 
-  const successToast = () => {
-    toast.success("post has been added successfully!", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-      progress: undefined,
-    });
-  };
-
+ 
   const handleCoverPicSubmit = async () => {
     let data = new FormData();
     data.append("file", files[0]);
@@ -79,9 +92,11 @@ export default function WritePost() {
       })
       .then((res) => {
         console.log("handleCoverPicSubmit", res);
+        successToast();
       })
       .catch((err) => {
         console.log("handleCoverPicSubmit", err);
+        errorToast();
       });
   };
 
@@ -156,3 +171,4 @@ export default function WritePost() {
     </div>
   );
 }
+export default  WritePost;

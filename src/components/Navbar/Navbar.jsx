@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 import Context from "../../context/Context";
 import { Link } from "react-router-dom";
-export default function Navbar() {
+ function Navbar() {
   const token = localStorage.getItem("Token");
 
   if (!token || token === "undefined") {
@@ -112,3 +112,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+export default Navbar;

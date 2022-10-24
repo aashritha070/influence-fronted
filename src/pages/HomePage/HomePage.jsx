@@ -10,7 +10,7 @@ import Footer from "../../components/footer/Footer";
 import "./home.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
-export default function Home() {
+function Home() {
   const [blogsByTag, setblogsByTag] = useState([]);
   const [allBlogs, setAllBlogs] = useState([]);
   const [allTags, setAllTags] = useState([]);
@@ -150,3 +150,4 @@ export default function Home() {
     </div>
   );
 }
+export default  Home;
