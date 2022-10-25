@@ -1,7 +1,7 @@
-import {Navbar} from "../../components/navbar/Navbar";
-import {React} from "react";
-import {axios} from "axios";
-import {ReactQuill} from "react-quill";
+import Navbar from "../../components/Navbar/Navbar";
+import React from "react";
+import axios from "axios";
+import ReactQuill from "react-quill";
 import { TagInput } from "evergreen-ui";
 import { TextInputField } from "evergreen-ui";
 import { Pane, FileUploader, FileCard } from "evergreen-ui";
@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./WritePage.css";
 import { Button } from "react-bootstrap";
 
-function WritePost() {
+export default function WritePost() {
   const [files, setFiles] = useState([]);
   const [fileRejections, setFileRejections] = useState([]);
   const [allTags, setAllTags] = useState([]);
@@ -185,4 +185,3 @@ function WritePost() {
     </div>
   );
 }
-export default WritePost;

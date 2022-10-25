@@ -1,5 +1,5 @@
-import {Button} from "react-bootstrap/Button";
-import {Form} from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import {React} from "react";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";

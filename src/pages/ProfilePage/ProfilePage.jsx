@@ -1,11 +1,11 @@
-import {Button} from "react-bootstrap/Button";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import {Modal} from "react-bootstrap/Modal";
+import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./ProfilePage.css";
 // import '../DeletePage/DeletePage'
-import { Navbar } from "../../components/Navbar/Navbar";
+import  Navbar  from "../../components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import { React, useEffect } from "react";
 import { useState } from "react";
