@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/signup" element={<SignUp />}></Route>
           <Route exact path="/tagselect" element={<Tags />}></Route>
-          <Route exact path="/writePost" element={<WritePost />}></Route>
+          <Route exact path="/writepost" element={<WritePost />}></Route>
           <Route exact path="/profile" element={<ProfileSettings />}></Route>
           <Route exact path="/password" element={<PasswordChange />}></Route>
           <Route exact path="/deleteUser" element={<DeleteUser />}></Route>

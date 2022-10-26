@@ -95,7 +95,7 @@ export default function Home() {
         </div>
         <div className="home-content">
           <span className="home-subtitle">Top picks for you!</span>
-          <div className="d-flex  gap-5 mt-3">
+          <div className="d-flex gap-5 mt-3">
             {blogsByTag.map((blog) => (
               <Card style={{ width: "10%" }}>
                 {blog.coverPic ? (
@@ -138,7 +138,7 @@ export default function Home() {
         </div>
         <div className="home-content">
           <span className="home-subtitle">Explore more</span>
-          <div className="d-flex flex-row  gap-5 mt-3">
+          <div className=" d-flex flex-wrap  gap-5 mt-3">
             {allBlogs.map((blog) => (
               <Card style={{ width: "20%" }} className="mb-5">
                 {blog.coverPic ? (
