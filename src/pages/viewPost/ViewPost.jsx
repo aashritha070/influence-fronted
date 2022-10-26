@@ -1,8 +1,7 @@
 import React from 'react'
 import {useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/footer/Footer';
+import  Navbar  from '../../components/Navbar/Navbar';
 import './viewPost.css';
 function viewPost() {
 
@@ -28,18 +27,6 @@ function viewPost() {
               <i class="fa fa-trash"></i>
               </span>
             </div>
-        {/* <div className="tags"> */}
-          {/* {tags.map((c) => (
-            <li className="postTags" key={c} value={c}>
-              {c}
-            </li>
-          ))}
-        </div>
-      </div>
-      
-        <h1 className="postTitle"></h1>
-          {post.Title} */}
-
       <div className="CurrentInfo">
         <span className="author">
           Author:<b>author name</b>
@@ -59,5 +46,4 @@ function viewPost() {
     </div>
  
   )};
-
-  export default viewPost;
+  export default  viewPost;

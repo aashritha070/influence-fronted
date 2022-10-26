@@ -72,3 +72,9 @@ Form.Label::after {
 .home-container-tag input[type="radio"] {
   display: none;
 }
+.tags-select-box-input {
+  display: flex;
+}
+.tags-select-box {
+  margin: 10% 20% 10% 20%;
+}

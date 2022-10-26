@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/button";
-import Form from "react-bootstrap/Form";
+import  Form  from "react-bootstrap/Form";
 import "./PasswordChange.css";
-import Navbar from "../../components/Navbar/Navbar";
+import  Navbar  from "../../components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import { React } from "react";
 import { useState } from "react";
@@ -13,8 +13,6 @@ const PasswordChange = () => {
 
   const jwtToken = localStorage.getItem("Token");
 
-  
-
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
@@ -25,7 +23,6 @@ const PasswordChange = () => {
       })
       .then((response) => {
         console.log(response);
-
       })
       .catch((error) => {
         console.log(error);

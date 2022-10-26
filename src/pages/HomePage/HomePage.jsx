@@ -1,16 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
-import Navbar from "../../components/Navbar/Navbar";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/footer/Footer";
+import { Pane, Pill } from "evergreen-ui";
+import Navbar from "../../components/Navbar/Navbar.jsx";
+import Header from "../../components/Header/Header.jsx";
 import "./home.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
 
-function Home() {
+export default function Home() {
   const [blogsByTag, setblogsByTag] = useState([]);
   const [allBlogs, setAllBlogs] = useState([]);
   const [allTags, setAllTags] = useState([]);
@@ -98,15 +97,27 @@ function Home() {
           <span className="home-subtitle">Top picks for you!</span>
           <div className="d-flex  gap-5 mt-3">
             {blogsByTag.map((blog) => (
-              <Card style={{ width: "20rem" }}>
+              <Card style={{ width: "10%" }}>
                 {blog.coverPic ? (
                   <Card.Img variant="top" src={defaultBlogCoverPic} />
                 ) : (
                   <Card.Img variant="top" src={defaultBlogCoverPic} />
                 )}
                 <Card.Body>
-                  <Card.Title>{blog.title}</Card.Title>
+                  <div className="author-badge">
+                    <Pane>
+                      <Pill className="author-badge" color="red">
+                        {blog.firstName + " " + blog.lastName}
+                      </Pill>
+                    </Pane>
+                  </div>
+                  <Card.Title className="mt-4">{blog.title}</Card.Title>
                   <Card.Text>{blog.content}</Card.Text>
+                  <Pane>
+                    <Pill display="inline-flex" margin={8} color="red">
+                      author
+                    </Pill>
+                  </Pane>
                   <a href="/viewpost">
                     <Button variant="primary">read more</Button>
                   </a>
@@ -127,17 +138,26 @@ function Home() {
         </div>
         <div className="home-content">
           <span className="home-subtitle">Explore more</span>
-          <div className="d-flex gap-5 mt-3">
+          <div className="d-flex flex-row  gap-5 mt-3">
             {allBlogs.map((blog) => (
-              <Card style={{ width: "20rem" }}>
+              <Card style={{ width: "20%" }} className="mb-5">
                 {blog.coverPic ? (
                   <Card.Img variant="top" src={defaultBlogCoverPic} />
                 ) : (
                   <Card.Img variant="top" src={defaultBlogCoverPic} />
                 )}
                 <Card.Body>
-                  <Card.Title>{blog.title}</Card.Title>
+                  <div className="author-badge">
+                    <Pane>
+                      <Pill className="author-badge" color="red">
+                        {blog.firstName + " " + blog.lastName}
+                      </Pill>
+                    </Pane>
+                  </div>
+
+                  <Card.Title className="mt-4">{blog.title}</Card.Title>
                   <Card.Text>{blog.content}</Card.Text>
+
                   <a href="/viewpost">
                     <Button variant="primary">read more</Button>
                   </a>
@@ -150,4 +170,3 @@ function Home() {
     </div>
   );
 }
-export default  Home;
