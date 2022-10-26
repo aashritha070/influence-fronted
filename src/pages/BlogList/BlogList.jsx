@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
-import  Navbar  from "../../components/Navbar/Navbar.jsx";
-import  Header  from "../../components/Header/Header.jsx";
+import { Pane, Pill } from "evergreen-ui";
+import Navbar from "../../components/Navbar/Navbar.jsx";
+import Header from "../../components/Header/Header.jsx";
 
 import "./BlogList.css";
 const defaultBlogCoverPic = require("../../static/defaultBlogCoverPic.png");
@@ -102,15 +102,23 @@ const BlogList = () => {
           <span className="home-subtitle">Here is your find..</span>
           <div className="d-flex  gap-5 mt-3">
             {blogsByTag.map((blog) => (
-              <Card style={{ width: "20rem" }}>
+              <Card style={{ width: "30rem" }}>
                 {blog.coverPic ? (
                   <Card.Img variant="top" src={defaultBlogCoverPic} />
                 ) : (
                   <Card.Img variant="top" src={defaultBlogCoverPic} />
                 )}
                 <Card.Body>
-                  <Card.Title>{blog.title}</Card.Title>
+                <div className="author-badge">
+                <Pane>
+                    <Pill className="author-badge"  color="red">
+                      {blog.firstName + " "+  blog.lastName}
+                    </Pill>
+                  </Pane>
+                  </div>
+                  <Card.Title className="mt-4">{blog.title}</Card.Title>
                   <Card.Text>{blog.content}</Card.Text>
+
                   <a href="/viewpost">
                     <Button variant="primary">read more</Button>
                   </a>
